@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.3.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="IJd-2a-h14">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.1"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="wKI-4g-1m2">
+            <objects>
+                <viewController id="IJd-2a-h14" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="tH2-Ao-9Bb">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="rw-logo" translatesAutoresizingMaskIntoConstraints="NO" id="eXv-HA-rPk">
+                                <rect key="frame" x="62.5" y="208.5" width="250" height="250"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="250" id="5vp-R8-oxs"/>
+                                    <constraint firstAttribute="width" constant="250" id="N8s-YT-BAC"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="eXv-HA-rPk" firstAttribute="centerX" secondItem="tH2-Ao-9Bb" secondAttribute="centerX" id="CO2-Qv-BNn"/>
+                            <constraint firstItem="eXv-HA-rPk" firstAttribute="centerY" secondItem="tH2-Ao-9Bb" secondAttribute="centerY" id="xQI-xb-mbZ"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="vin-3Y-xMC"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Hjz-38-MJ9" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="53" y="375"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="rw-logo" width="512" height="512"/>
+    </resources>
+</document>
