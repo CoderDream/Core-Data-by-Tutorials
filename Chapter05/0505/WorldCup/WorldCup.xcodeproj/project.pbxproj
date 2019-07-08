@@ -76,12 +76,12 @@
 				FED638491F4CCA68006C5675 /* Team+CoreDataClass.swift */,
 				FED6384A1F4CCA68006C5675 /* Team+CoreDataProperties.swift */,
 				FEE5CD121D7E0C44009F1321 /* Main.storyboard */,
-				FEE5CD1A1D7E0C44009F1321 /* LaunchScreen.storyboard */,
 				FEE5CD181D7E0C44009F1321 /* Assets.xcassets */,
-				FEE5CD231D7E0CA0009F1321 /* seed.json */,
-				FEE5CD251D7E0CC8009F1321 /* attribution.txt */,
+				FEE5CD1A1D7E0C44009F1321 /* LaunchScreen.storyboard */,
 				FEE5CD1D1D7E0C44009F1321 /* Info.plist */,
 				FEE5CD151D7E0C44009F1321 /* WorldCup.xcdatamodeld */,
+				FEE5CD231D7E0CA0009F1321 /* seed.json */,
+				FEE5CD251D7E0CC8009F1321 /* attribution.txt */,
 			);
 			path = WorldCup;
 			sourceTree = "<group>";
