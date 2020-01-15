@@ -69,13 +69,13 @@ Included with the resources for this book is a starter project called UnCloudNot
 
 Build and run the app in the iPhone simulator. You'll see an empty list of notes:
 
-![](images/image78.jpg)
+![](https://github.com/CoderDream/Core-Data-by-Tutorials/blob/master/v6/Chapter06/images/image78.jpg)
 
 Tap the plus (+) button in the top-right corner to add a new note. Add a title (there's default text in the note body to make the process faster) and tap Create to save the new note to the data store. Repeat this a few times so you have some sample data to migrate.
 
 Back in Xcode, open the **UnCloudNotesDatamodel.xcdatamodeld** file to show the entity modeling tool in Xcode. The data model is simple --- just one entity, a Note, with a few attributes.
 
-![](images/image79.jpg)
+![](https://github.com/CoderDream/Core-Data-by-Tutorials/blob/master/v6/Chapter06/images/image79.jpg)
 
 You're going to add a new feature to the app: the ability to attach a photo to a note. The data model doesn't have any place to persist this kind of information, so you'll need to add a place in the data model to hold onto the photo. But you already added a few test notes in the app. How can you change the model without breaking the existing notes?
 
@@ -99,11 +99,11 @@ Change that selection to match the name of the new data model,
 
 UnCloudNotesDataModel v2.
 
-![](images/image80.jpg)
+![](https://github.com/CoderDream/Core-Data-by-Tutorials/blob/master/v6/Chapter06/images/image80.jpg)
 
 Once you've made that change, notice that the little green check mark icon in the project navigator has moved from the previous data model to the v2 data model:
 
-![](images/image81.jpg)
+![](https://github.com/CoderDream/Core-Data-by-Tutorials/blob/master/v6/Chapter06/images/image81.jpg)
 
 Core Data will try to first connect the persistent store with the ticked model version when setting up the stack. If a store file was found, and it isn't compatible with this model file, a migration will be triggered. The older version is there to support migration. The current model is the one Core Data will ensure is loaded prior to attaching the rest of the stack for your use.
 
@@ -111,7 +111,7 @@ Make sure you have the v2 data model selected and add an **image** attribute to 
 
 Since this attribute is going to contain the actual binary bits of the image, you'll use a custom NSValueTransformer to convert from binary bits to a UIImage and back again. Just such a transformer has been provided for you in ImageTransformer. In the Data Model Inspector on the right of the screen, look for the Value Transformer field, and enter **ImageTransformer**. Next, in the Module field, choose **Current Product Module**.
 
-![](images/image82.jpg)
+![](https://github.com/CoderDream/Core-Data-by-Tutorials/blob/master/v6/Chapter06/images/image82.jpg)
 
 ```
 Note: When referencing code from your model files, just like in Xib and Storyboard files, you’ll need to specify a module (UnCloudNotes or Current Product Module depending on what your drop down provides) to allow the class loader to find the exact code you want to attach.
@@ -175,7 +175,7 @@ The Create Note scene is attached to a navigation controller with a root view co
 
 This will disconnect the old Create Note scene and connect the new, image- powered one instead.
 
-![](images/image83.jpg)
+![](https://github.com/CoderDream/Core-Data-by-Tutorials/blob/master/v6/Chapter06/images/image83.jpg)
 
 Next, open **AttachPhotoViewController.swift** and add the following method to the
 
@@ -195,11 +195,11 @@ This will dequeue the correct UITableViewCell subclass based on the note having 
 
 This will update the UIImageView inside the NoteImageTableViewCell with the image from the note. Build and run, and choose to add a new note:
 
-![](images/image84.jpg)
+![](https://github.com/CoderDream/Core-Data-by-Tutorials/blob/master/v6/Chapter06/images/image84.jpg)
 
 Tap the Attach Image button to add an image to the note. Choose an image from your simulated photo library and you'll see it in your new note:
 
-![](images/image85.jpg)
+![](https://github.com/CoderDream/Core-Data-by-Tutorials/blob/master/v6/Chapter06/images/image85.jpg)
 
 The app uses the standard UIImagePickerController to add photos as attachments to notes.
 
@@ -219,7 +219,7 @@ The first step in every migration is to create a new model version. As before, s
 
 Next, you'll add a new entity to the new data model. In the lower-left corner, click the Add Entity button. Rename this entity Attachment. Select the entity and in the Data Model Inspector pane, set the Class Name to Attachment, and the Module to Current Product Module.
 
-![](images/image86.jpg)
+![](https://github.com/CoderDream/Core-Data-by-Tutorials/blob/master/v6/Chapter06/images/image86.jpg)
 
 Create two attributes in the Attachment entity. Add a non-optional attribute named image of type Transformable, with the Custom Class transformer field set to ImageTransformer and Module field set to Current Product Module. This is the same as the image attribute you added to the Note entity earlier. Add a second non- optional attribute called dateCreated and make it a Date type.
 
@@ -227,7 +227,7 @@ Next, add a relationship to the Note entity from the Attachment entity. Set the 
 
 Select the Note entity and delete the image attribute. Finally, create a to-many relationship from the Note entity to the Attachment entity. Leave it marked as *Optional*. Name the relationship attachments, set the destination to Attachment and select the note relationship you just created as the inverse.
 
-![](images/image87.jpg)
+![](https://github.com/CoderDream/Core-Data-by-Tutorials/blob/master/v6/Chapter06/images/image87.jpg)
 
 The data model is now ready for migration! While the Core Data model is ready, the code in your app will need some updates to use the changes to the data entities.
 
@@ -265,7 +265,7 @@ Now that you've finished making changes to the v3 data model, you know lightweig
 
 Navigate to the iOS\\Core Data section and select Mapping Model:
 
-![](images/image88.jpg)
+![](https://github.com/CoderDream/Core-Data-by-Tutorials/blob/master/v6/Chapter06/images/image88.jpg)
 
 Click Next, select the v2 data model as the source model and select the v3 data model as the target model.
 
@@ -281,7 +281,7 @@ Select NoteToNote and you'll see two sections: **Attribute Mappings** and
 
 #### Relationship Mappings.
 
-![](images/image89.jpg)
+![](https://github.com/CoderDream/Core-Data-by-Tutorials/blob/master/v6/Chapter06/images/image89.jpg)
 
 The attributes mappings here are fairly straightforward. Notice the value expressions with the pattern \$source. \$source is a special token for the mapping model editor, representing a reference to the source instance. Remember, with Core Data, you're not dealing with rows and columns in a database. Instead, you're dealing with objects, their attributes and classes.
 
@@ -293,11 +293,11 @@ Select the Attachment mapping and make sure the Utilities panel on the right is 
 
 Select the last tab in the Utilities panel to open the Entity Mapping inspector:
 
-![](images/image90.jpg)
+![](https://github.com/CoderDream/Core-Data-by-Tutorials/blob/master/v6/Chapter06/images/image90.jpg)
 
 Select Note as the source entity in the drop-down list. Once you select the source entity, Xcode will try to resolve the mappings automatically based on the names of the attributes of the source and destination entities. In this case, Xcode will fill in the dateCreated and image mappings for you:
 
-![](images/image91.jpg)
+![](https://github.com/CoderDream/Core-Data-by-Tutorials/blob/master/v6/Chapter06/images/image91.jpg)
 
 Xcode will also rename the entity mapping from Attachment to NoteToAttachment. Xcode is being helpful again; it just needs a small nudge from you to specify the source entity. Since the attribute names match, Xcode will fill in the value
 
@@ -313,7 +313,7 @@ In the NoteToAttachment mapping, you'll see a relationship mapping called note. 
 
 Select the **NoteToAttachment** mapping. Select the note relationship row in the list of relationships so that the Inspector changes to reflect the properties of the relationship mapping. In the Source Fetch field, select **Auto Generate Value Expression**. Enter \$source in the Key Path field and select **NoteToNote** from the Mapping Name field.
 
-![](images/image92.jpg)
+![](https://github.com/CoderDream/Core-Data-by-Tutorials/blob/master/v6/Chapter06/images/image92.jpg)
 
 This should generate a value expression that looks like this:
 
@@ -373,7 +373,7 @@ Next, inside the Attachment entity:
 
 8.  If a newRelationship has been automatically created, delete it.
 
-![](images/image93.jpg)
+![](https://github.com/CoderDream/Core-Data-by-Tutorials/blob/master/v6/Chapter06/images/image93.jpg)
 
 A parent entity is similar to having a parent class, which means ImageAttachment will inherit the attributes of Attachment. When you set up the managed object subclass later, you'll see this inheritance made explicit in the code.
 
@@ -381,7 +381,7 @@ Before you create the custom code for the mapping model, it'll be easier if you 
 
 Next, open **Attachment.swift** and delete the image property. Since it's been moved to ImageAttachment, and removed from the Attachment entity in the v4 data model, it should be deleted from the code. That should do it for the new data model. Once you've finished, your version 4 data model should look like this:
 
-![](images/image94.jpg)
+![](https://github.com/CoderDream/Core-Data-by-Tutorials/blob/master/v6/Chapter06/images/image94.jpg)
 
 ## Mapping model
 
@@ -395,7 +395,7 @@ Select the AttachmentToAttachment mapping. Xcode has also detected some common a
 
 Next, select the ImageAttachment mapping. This mapping has no source entity since it's a completely new entity. In the inspector, change the source entity to be Attachment. Now that Xcode knows the source, it will fill in a few of the value expressions for you. Xcode will also rename the mapping to something a little more appropriate, AttachmentToImageAttachment.
 
-![](images/image95.jpg)
+![](https://github.com/CoderDream/Core-Data-by-Tutorials/blob/master/v6/Chapter06/images/image95.jpg)
 
 For the remaining, unfilled, attributes, you'll need to write some code. This is where you need image processing and custom code beyond simple FUNCTION expressions! But first, delete those extra mappings, *caption*, *height* and *width*. These values will be computed using a custom migration policy, which happens to be the next section!
 
@@ -693,7 +693,7 @@ Here are the general steps you'll need to take to test each migration:
 
 At this point, you should see some console output with the migration status. Note the migration will happen prior to the app presenting onscreen.
 
-![](images/image96.jpg)
+![](https://github.com/CoderDream/Core-Data-by-Tutorials/blob/master/v6/Chapter06/images/image96.jpg)
 
 You now have an app that will successfully migrate between any combinations of old data versions to the latest version.
 
