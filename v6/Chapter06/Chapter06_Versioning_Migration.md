@@ -163,33 +163,51 @@ As a rule of thumb, all migrations, if necessary, should start as lightweight mi
 
 As for the migration from UnCloudNotes to UnCloudNotes v2, the image property has a default value of nil since it's an optional property. This means Core Data can easily migrate the old data store to a new one, since this change follows item 3 in the list of lightweight migration patterns.
 
-## Image attachments
+## Image attachments 图片附件
 
-Now the data is migrated, you need to update the UI to allow image attachments to new notes. Luckily, most of this work has been done for you.
+Now the data is migrated, you need to update the UI to allow image attachments to new notes. Luckily, most of this work has been done for you. 现在，数据已经迁移，你需要更新界面以允许图片附件添加到新便签中。幸运的是，绝大多数的工作已经在你开始之前完成了。
 
-Open **Main.storyboard** and find the Create Note scene. Underneath, you'll see the
+Open **Main.storyboard** and find the Create Note scene. Underneath, you'll see the Create Note With Images scene that includes the interface to attach an image. 打开 【Main.storyboard】 文件，然后找到创建便签场景。 在场景下方，你将看到创建带图片附件的场景。
 
-Create Note With Images scene that includes the interface to attach an image.
+The Create Note scene is attached to a navigation controller with a root view controller relationship. Control-drag from the navigation controller to the Create Note With Images scene and select the root view controller relationship segue.创建便签场景是一个附着在根视图控制器的导航控制器。拖拽一个导航控制器到视图中，然后选择根视图控制器作为转场关系。
 
-The Create Note scene is attached to a navigation controller with a root view controller relationship. Control-drag from the navigation controller to the Create Note With Images scene and select the root view controller relationship segue.
-
-This will disconnect the old Create Note scene and connect the new, image- powered one instead.
+This will disconnect the old Create Note scene and connect the new, image-powered one instead. 这将使新的连接代替旧的连接。
 
 ![](https://github.com/CoderDream/Core-Data-by-Tutorials/blob/master/v6/Chapter06/images/image83.jpg)
 
-Next, open **AttachPhotoViewController.swift** and add the following method to the
+Next, open **AttachPhotoViewController.swift** and add the following method to the UIImagePickerControllerDelegate extension: 接下来，打开 【AttachPhotoViewController.swift】 文件，把下面的方法添加到 【UIImagePickerControllerDelegate】 代理的扩展中：
 
-UIImagePickerControllerDelegate extension:
+```swift
+func imagePickerController(_ picker: UIImagePickerController,
+didFinishPickingMediaWithInfo info:
+[UIImagePickerController.InfoKey: Any]) {
+guard let note = note else { return }
+note.image =
+info[UIImagePickerController.InfoKey.originalImage] as?
+UIImage
+_ = navigationController?.popViewController(animated: true)
+}
+```
 
-This will populate the new image property of the note once the user selects an image from the standard image picker.
+This will populate the new image property of the note once the user selects an image from the standard image picker. 这将弹出一个标准的图片选择器，用户选择的图片将用于设置便签的图片属性。
 
-Next, open **CreateNoteViewController.swift** and replace viewDidAppear(\_:) with the following:
+Next, open **CreateNoteViewController.swift** and replace viewDidAppear(\_:) with the following:接下来，打开 【CreateNoteViewController.swift】 ，用下面的代码替换 viewDidAppear(\_:) 方法：
 
-This will display the new image if the user has added one to the note.
+```swift
+override func viewDidAppear(_ animated: Bool) {
+super.viewDidAppear(animated)
+guard let image = note?.image else {
+titleField.becomeFirstResponder()
+return
+}
+attachedPhoto.image = image
+view.endEditing(true)
+}
+```
 
-Next, open **NotesListViewController.swift** and update
+This will display the new image if the user has added one to the note.这样就会显示用户选择的图片到便签中。
 
-tableView(\_:cellForRowAt): with the following:
+Next, open **NotesListViewController.swift** and update tableView(\_:cellForRowAt): with the following:接下来
 
 This will dequeue the correct UITableViewCell subclass based on the note having an image present or not. Finally, open **NoteImageTableViewCell.swift** and add the following to updateNoteInfo(note:):
 
